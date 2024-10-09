@@ -41,7 +41,15 @@ app.group("/user", app => app
         body: loginDTO,
         response: loginDTO
     })
-    .get("/:id", () => "User by id Route")
+    .get("/:id", ({params: {id}}) => {
+            return id
+        },
+        {
+            params: t.Object({
+                id: t.Numeric()
+            })
+        }
+    )
 )
 
     .listen(5000);
