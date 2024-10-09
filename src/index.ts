@@ -1,5 +1,6 @@
-import {Elysia} from "elysia";
+import {Elysia, t} from "elysia";
 import {plugin} from "./plugin";
+import {loginDTO} from "./models";
 
 
 //Application
@@ -36,7 +37,10 @@ const app = new Elysia().get("/", () => "Hello Food-server")
     })
 app.group("/user", app => app
     .post("/sing-up", () => "Signup Route")
-    .post("log-in", () => "Login Route")
+    .post("/log-in", ({body}) => body, {
+        body: loginDTO,
+        response: loginDTO
+    })
     .get("/:id", () => "User by id Route")
 )
 
