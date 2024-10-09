@@ -1,16 +1,27 @@
-import { Elysia } from "elysia";
+import {Elysia} from "elysia";
+import {plugin} from "./plugin";
+
+
+//Application
 
 const app = new Elysia().get("/", () => "Hello Food-server")
-    .get("/post/:id", ({params: {id}}) => {return{id: id, title: "Bun"}})
+    .get("/post/:id", ({params: {id}}) => {
+        return {id: id, title: "Bun"}
+    })
+    .use(plugin)
     .state("version", 1)
     .decorate('getDate', () => Date.now())
     .post("/post", ({body, set}) => {
         set.status = 201
-        return body})
-    .get("/track/*/", () => {return "Track route"})
+        return body
+    })
+    .get("/track/*/", () => {
+        return "Track route"
+    })
     .get("/foods", ({store, getDate}) => {
         console.log(store)
         console.log(getDate())
+        console.log(store ["plugin-version"])
         return new Response(JSON.stringify({
             "foods": [
                 "Apple",
@@ -23,8 +34,15 @@ const app = new Elysia().get("/", () => "Hello Food-server")
             }
         })
     })
+app.group("/user", app => app
+    .post("/sing-up", () => "Signup Route")
+    .post("log-in", () => "Login Route")
+    .get("/:id", () => "User by id Route")
+)
+
     .listen(5000);
 
 console.log(
-  `🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`
+    `🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`
 );
+
