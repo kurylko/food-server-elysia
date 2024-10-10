@@ -14,15 +14,18 @@ datasource db {
 }
 
 model Food {
-  id           String  @id @default(auto()) @map("_id") @db.ObjectId
+  id           String    @id @default(auto()) @map("_id") @db.ObjectId
   foodName     String
   fat          String
   protein      String
   carbohydrate String
   calories     String
   weight       String?
-  addedByUser  User?   @relation("SavedFood", fields: [userId], references: [id])
-  userId       String? @db.ObjectId
+  addedByUser  User?     @relation("SavedFood", fields: [userId], references: [id])
+  userId       String?   @db.ObjectId
+  createdAt    DateTime? @default(now())
+
+  @@map("foods")
 }
 
 model User {
@@ -33,8 +36,4 @@ model User {
   savedFood Food[] @relation("SavedFood")
 
   @@map("users")
-}
-
-model foods {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
 }
