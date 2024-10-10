@@ -3,11 +3,13 @@
   "version": "1.0.50",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "bun run --watch src/index.ts"
+    "dev": "bun run --watch src/index.ts",
+    "build": "bun run --watch src/build.ts"
   },
   "dependencies": {
     "@prisma/client": "^5.20.0",
     "elysia": "latest",
+    "glob": "^11.0.0",
     "mongodb": "^6.9.0"
   },
   "devDependencies": {
