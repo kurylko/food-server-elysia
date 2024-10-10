@@ -8,6 +8,7 @@
   "dependencies": {
     "@prisma/client": "^5.20.0",
     "elysia": "latest",
+    "glob": "^11.0.0",
     "mongodb": "^6.9.0"
   },
   "devDependencies": {
