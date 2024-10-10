@@ -1,30 +1,18 @@
-import { Elysia } from "elysia";
+import {Elysia} from "elysia";
+import foodRoutes from "./routes/food";
 
-const app = new Elysia().get("/", () => "Hello Food-server")
-    .get("/post/:id", ({params: {id}}) => {return{id: id, title: "Bun"}})
-    .state("version", 1)
-    .decorate('getDate', () => Date.now())
-    .post("/post", ({body, set}) => {
-        set.status = 201
-        return body})
-    .get("/track/*/", () => {return "Track route"})
-    .get("/foods", ({store, getDate}) => {
-        console.log(store)
-        console.log(getDate())
-        return new Response(JSON.stringify({
-            "foods": [
-                "Apple",
-                "Banana",
-                "Milk"
-            ]
-        }), {
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
-    })
-    .listen(5000);
+
+
+//Application
+
+const app = new Elysia()
+
+app
+    .group('/api', (app: InstanceType<typeof Elysia>) => app.use(foodRoutes))
+    .listen(process.env.PORT  || 5000)
+
 
 console.log(
-  `🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`
+    `🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`
 );
+
