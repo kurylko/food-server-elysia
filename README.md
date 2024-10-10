@@ -1,4 +1,10 @@
-# Elysia with Bun runtime
+# Server - Elysia with Bun runtime
+
+## Used technologies:
+- Bun
+- Elysia
+- Prisma
+- MongoDB
 
 
 ## Development
