@@ -24,6 +24,8 @@ model Food {
   addedByUser  User?     @relation("SavedFood", fields: [userId], references: [id])
   userId       String?   @db.ObjectId
   createdAt    DateTime? @default(now())
+
+  @@map("foods")
 }
 
 model User {
@@ -34,8 +36,4 @@ model User {
   savedFood Food[] @relation("SavedFood")
 
   @@map("users")
-}
-
-model foods {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
 }

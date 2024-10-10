@@ -7,7 +7,8 @@
   },
   "dependencies": {
     "@prisma/client": "^5.20.0",
-    "elysia": "latest"
+    "elysia": "latest",
+    "mongodb": "^6.9.0"
   },
   "devDependencies": {
     "bun-types": "latest",
