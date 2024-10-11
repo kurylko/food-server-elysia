@@ -3,7 +3,14 @@ import foodRoutes from "./routes/food";
 import userRoutes from "./routes/user";
 import path from 'node:path';
 import {glob} from 'glob';
+const dotEnv = await Bun.file('.env')
 
+
+try {
+    if (!(await dotEnv.exists())) throw new Error('No .env found')
+} catch (error) {
+    console.error(error)
+}
 
 // TODO: Group Route - Resolve!
 
